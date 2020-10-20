@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend
+  name: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: 283210816420.dkr.ecr.us-east-1.amazonaws.com/kiosk-backend
+        name: kiosk-backend
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+        - name: MONGODB_URL
+          value: "mongodb://mongodb:27017/kiosk-db"
+        resources: {}
+      imagePullSecrets:
+      - name: pureworks
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend
+  name: backend
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: backend
+status:
+  loadBalancer: {}

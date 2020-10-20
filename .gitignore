@@ -5,6 +5,9 @@
 *.tfstate
 *.tfstate.*
 
+# kubeconfig
+kubeconfig_*
+
 # Crash log files
 crash.log
 

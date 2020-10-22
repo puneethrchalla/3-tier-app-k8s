@@ -1,7 +1,3 @@
-provider "random" {
-  version = "~> 2.1"
-}
-
 provider "local" {
   version = "~> 1.2"
 }
@@ -26,7 +22,7 @@ module "demo-cluster" {
   subnets         = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
 
-  #enable_irsa     = true
+  enable_irsa     = true
 
   cluster_endpoint_private_access = true
 
